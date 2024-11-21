@@ -4,6 +4,9 @@
             <div class="jogadores">
                 <Jogadores />
             </div>
+            <div class="cartas">
+                <Cartas />
+            </div>
             <div class="rodape">
                 <Rodape />
             </div>
