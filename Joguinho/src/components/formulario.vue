@@ -37,7 +37,9 @@
     methods: {
       irParaProximaEtapa() {
         console.log("Jogadores cadastrados:", this.jogadores);
-        alert("Jogadores cadastrados com sucesso: " + this.jogadores.join(", "));
+        // alert("Jogadores cadastrados com sucesso: " + this.jogadores.join(", "));
+        localStorage.setItem("jogadores", JSON.stringify(this.jogadores));
+        this.$router.push('/tabuleiro')
       },
     },
   };
