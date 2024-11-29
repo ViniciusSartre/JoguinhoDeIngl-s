@@ -1,8 +1,9 @@
 <template>
     <div class="cadastro">
+      <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1507580/ss_8db1997119b44bf18e6c41d72b696b097210ce8d.1920x1080.jpg?t=1732837719" alt="">
       <div class="caixaconteudo">
         <div class="titulo">
-          <h1>Nome do Jogo</h1>
+          <h1>Guess!</h1>
         </div>
         <div class="subtitulo">
           <h2>Cadastre os Jogadores</h2>
@@ -19,7 +20,7 @@
             </label>
           </div>
           <div class="botao">
-            <input type="submit" value="jogar" />
+            <input type="submit" value="JOGAR" />
           </div>
         </form>
       </div>
@@ -48,22 +49,32 @@
   <style scoped>
   .cadastro {
     display: flex;
+    position: relative;
     flex-direction: column;
     height: 100vh;
-    background-color: gray;
+    /* background-color: gray; */
     color: white;
     align-content: center;
+
+    img{
+      filter: blur(5px);
+      display: block;
+      max-width: 100vw;
+      max-height: 100vh;
+    }
   }
   
   .caixaconteudo {
+    position: absolute;
     width: 30%;
-    margin: auto;
+    margin-top: 20vh;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 50px;
-    background-color: darkgray;
+    background-color: #a9a9a9cb;
+    align-self: center;
   }
   
   .titulo {
@@ -104,5 +115,10 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+  }
+
+  .botao input:hover {
+    background-color: black;
+    color: white;
   }
   </style>
