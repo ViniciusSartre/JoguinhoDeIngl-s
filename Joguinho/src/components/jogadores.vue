@@ -2,14 +2,14 @@
     <div class="jogadores-container">
       <div
         class="caixajogadores"
-        v-for="(jogador, index) in jogadores"
+        v-for="(jogador) in jogadorSalvo"
         :key="jogador.nome"
         :style="{ borderColor: jogador.cor }"
       >
         
         <div class="jogadores">
           <div class="nome">
-            <h1>{{ jogadorSalvo[index] }}</h1>
+            <h1>{{ jogador.nome }}</h1>
           </div>
           <div class="posicao">
             <h1>{{ jogador.posicao }}°</h1>
@@ -36,12 +36,12 @@
     data() {
       return {
         jogadorSalvo: '',
-        jogadores: [
-          { nome: "Rene", posicao: 1, poderes: [1, 2, 3, 4, 5], pontos: 20, cor: "#bce1ab" },
-          { nome: "Advalker", posicao: 2, poderes: [1, 2, 3, 4, 5], pontos: 18, cor: "#573e54" },
-          { nome: "João", posicao: 3, poderes: [1, 2, 3, 4, 5], pontos: 16, cor: "#361542" },
-          { nome: "Fernanda", posicao: 4, poderes: [1, 2, 3, 4, 5], pontos: 14, cor: "#828a7d" },
-        ],
+        // jogadores: [
+        //   { nome: "Rene", posicao: 1, poderes: [1, 2, 3, 4, 5], pontos: 20, cor: "#bce1ab" },
+        //   { nome: "Advalker", posicao: 2, poderes: [1, 2, 3, 4, 5], pontos: 18, cor: "#573e54" },
+        //   { nome: "João", posicao: 3, poderes: [1, 2, 3, 4, 5], pontos: 16, cor: "#361542" },
+        //   { nome: "Fernanda", posicao: 4, poderes: [1, 2, 3, 4, 5], pontos: 14, cor: "#828a7d" },
+        // ],
       };
     },
 

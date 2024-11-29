@@ -12,13 +12,13 @@
         <h2>Cadastre os Jogadores</h2>
       </div>
       <form @submit.prevent="irParaProximaEtapa">
-        <div class="jogador" v-for="(jogador, index) in jogadores" :key="index">
+        <div class="jogador" v-for="(jogador, key) in jogadores" :key="key">
           <label>
-            Jogador {{ index + 1 }}
+            {{ key }}
             <input
               type="text"
-              v-model="jogadores[index]"
-              :placeholder="'Jogador ' + (index + 1)"
+              v-model="jogadores[key].nome"
+              :placeholder="key"
             />
           </label>
         </div>
@@ -39,14 +39,28 @@ export default {
   name: "Formulario",
   data() {
     return {
-      jogadores: ["", "", "", ""],
+      // jogadores: ["", "", "", ""],
+      jogadores: {
+        jogador1:{
+          nome:'', posicao: 1, pontos: 0, cor: "#bce1ab" 
+        },
+        jogador2:{
+          nome:'', posicao: 2, pontos: 0, cor: "#573e54"
+        },
+        jogador3:{
+          nome:'', posicao: 3, pontos: 0, cor: "#361542"
+        },
+        jogador4:{
+          nome:'', posicao: 4, pontos: 0, cor: "#828a7d"
+        },
+      },
       mensagemErro: "",
     };
   },
   methods: {
     irParaProximaEtapa() {
-      const jogadoresValidos = this.jogadores.filter(
-        (jogador) => jogador.trim() !== ""
+      const jogadoresValidos = Object.values(this.jogadores).filter(
+        (jogador) => jogador.nome.trim() !== ""
       );
 
       if (jogadoresValidos.length < 2) {
