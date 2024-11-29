@@ -16,9 +16,9 @@
           </div>
         </div>
   
-        <div class="caixapoderes">
+        <!-- <div class="caixapoderes">
           <div class="poderes" v-for="(poder, index) in jogador.poderes" :key="index"></div>
-        </div>
+        </div> -->
   
         <div class="caixapontos">
           <div class="pontos">
@@ -37,10 +37,10 @@
       return {
         jogadorSalvo: '',
         jogadores: [
-          { nome: "Rene", posicao: 1, poderes: [1, 2, 3, 4, 5], pontos: 20, cor: "#bd0808" },
-          { nome: "Advalker", posicao: 2, poderes: [1, 2, 3, 4, 5], pontos: 18, cor: "#07a101" },
-          { nome: "João", posicao: 3, poderes: [1, 2, 3, 4, 5], pontos: 16, cor: "#0123bb" },
-          { nome: "Fernanda", posicao: 4, poderes: [1, 2, 3, 4, 5], pontos: 14, cor: "#d6da00" },
+          { nome: "Rene", posicao: 1, poderes: [1, 2, 3, 4, 5], pontos: 20, cor: "#bce1ab" },
+          { nome: "Advalker", posicao: 2, poderes: [1, 2, 3, 4, 5], pontos: 18, cor: "#573e54" },
+          { nome: "João", posicao: 3, poderes: [1, 2, 3, 4, 5], pontos: 16, cor: "#361542" },
+          { nome: "Fernanda", posicao: 4, poderes: [1, 2, 3, 4, 5], pontos: 14, cor: "#828a7d" },
         ],
       };
     },
@@ -73,7 +73,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
-  border: 2px solid; 
+  border: 3px solid; 
   border-radius: 10px;
   padding: 10px;
   width: 300px;

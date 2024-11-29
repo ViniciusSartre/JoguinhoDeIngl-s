@@ -28,7 +28,7 @@
 </script>
 <style>
     .caixaTabuleiro{
-        background-color: crimson;
+        background-color: #5c5c5c;
         height: 100vh;
     }
 </style>                  
