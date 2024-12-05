@@ -64,9 +64,26 @@ export default {
         3: 0,
       },
       cartas: {
-        0: { nivel: "1", texto: "Qualquer coisa", resposta: "Sim", imagem: "https://portalgerais.com/wp-content/uploads/2014/11/o-que-te-faz-feliz-600x376.jpg" },
-        1: { nivel: "1", texto: "Qualquer coisa 2", resposta: "Não", imagem: "https://st4.depositphotos.com/2934765/28878/v/450/depositphotos_288788394-stock-illustration-emoji-smile-icon-vector-symbol.jpg" },
-        2: { nivel: "1", texto: "Qualquer coisa 3", resposta: "Não", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiQvCWG9vl-2ioYShf7hXqPTsQOtxUcET1Sg&s" },
+        0: { nivel: "1", texto: "What color is the sky on a clear day?", resposta: "Blue", imagem: "https://i.pinimg.com/originals/b5/bb/87/b5bb87a208d6ef3510fbfa8dd2177e73.jpg" },
+        1: { nivel: "1", texto: "How many legs does a spider have?", resposta: "Eight", imagem: "https://img.freepik.com/fotos-premium/teia-de-aranha-na-teia-de-aranha-real-do-fundo-preto-da-escuridao_868749-7862.jpg" },
+        2: { nivel: "1", texto: "What is the opposite of 'cold'?", resposta: "Hot", imagem: "https://wallpapercave.com/wp/wp3335319.jpg" },
+        3: { nivel: "1", texto: "What animal says 'woof'?", resposta: "Dog", imagem: "https://static.vecteezy.com/ti/vetor-gratis/p3/20736956-cachorro-latido-animal-som-efeito-texto-dentro-uma-discurso-bolha-balao-clipart-fofa-desenho-animado-onomatopeia-historias-em-quadrinhos-e-rotulacao-vetor.jpg" },
+        4: { nivel: "1", texto: "What planet do we live on?", resposta: "Earth", imagem: "https://s.hdnux.com/photos/43/10/55/9210689/6/1200x0.jpg" },
+        5: { nivel: "1", texto: "What is the first letter of the alphabet?", resposta: "A", imagem: "https://img.freepik.com/premium-photo/multicolored-letters-english-alphabet-mixed-pink_74906-2986.jpg" },
+        6: { nivel: "1", texto: "What fruit is yellow and curved?", resposta: "Banana", imagem: "https://www.fmdos.cl/wp-content/uploads/2017/05/frutas.jpg" },
+        7: { nivel: "1", texto: "How many days are in a week?", resposta: "Seven", imagem: "https://img.freepik.com/premium-photo/calendar-white-background-3d-rendering_519469-7595.jpg?w=2000" },
+        8: { nivel: "1", texto: "What do bees make?", resposta: "Honey", imagem: "https://img.ibxk.com.br/2019/10/17/17093503091025.jpeg" },
+        9: { nivel: "1", texto: "What is the capital of France?", resposta: "Paris", imagem: "https://www.creativefabrica.com/wp-content/uploads/2023/02/27/Eiffel-Tower-Pencil-Sketch-62684714-1.png" },
+        10: { nivel: "1", texto: "What is the main ingredient in bread?", resposta: "Flour", imagem: "https://img.freepik.com/fotos-premium/um-desenho-de-um-pouco-de-pao-e-um-pouco-de-pao-sobre-uma-mesa_890183-4698.jpg?w=826" },
+        11: { nivel: "1", texto: "How many continents are there on Earth?", resposta: "Seven", imagem: "https://static.mundoeducacao.uol.com.br/mundoeducacao/2023/02/mapa-mundi-em-fundo-azul.jpg" },
+        12: { nivel: "1", texto: "What is the boiling point of water in Celsius?", resposta: "100 degrees", imagem: "https://static.vecteezy.com/ti/vetor-gratis/p2/6730612-agua-fervente-em-panela-panela-no-fogao-com-agua-vapor-fogo-design-vetor.jpg" },
+        13: { nivel: "1", texto: "Who wrote 'Romeo and Juliet'?", resposta: "William Shakespeare", imagem: "https://cdn5.colorir.com/desenhos/color/201532/pilha-de-livros-colegio-1121090.jpg" },
+        14: { nivel: "1", texto: "What is the largest bone in the human body?", resposta: "Femur", imagem: "https://upload.wikimedia.org/wikipedia/commons/2/27/Homo_sapiens_skeleton_-_MUSE.JPG" },
+        15: { nivel: "1", texto: "What is the chemical symbol for gold?", resposta: "Au", imagem: "https://static.vecteezy.com/ti/vetor-gratis/p1/31091089-ouro-barra-simples-desenho-animado-ilustracao-marketing-conceito-icone-isolado-vetor.jpg" },
+        16: { nivel: "1", texto: "Which planet is known as the 'Red Planet'?", resposta: "Mars", imagem: "https://cdn5.colorir.com/desenhos/color/202037/sistema-solar-espaco-1610788.jpg" },
+        17: { nivel: "1", texto: "Who painted the 'Mona Lisa'?", resposta: "Leonardo da Vinci", imagem: "https://midias.jb.com.br/_midias/jpg/2020/10/02/1100x732/1_monalisa-557041.jpg" },
+        18: { nivel: "1", texto: "What is the square root of 144?", resposta: "12", imagem: "https://img.freepik.com/vetores-premium/vetor-de-quadro-branco-em-branco-na-parede-de-tijolos-brancos-para-espaco-de-copia-ilustracao-vetorial-em-branco_542094-507.jpg?w=1380" },
+        18: { nivel: "1", texto: "What is the name of our natural satellite?", resposta: "Moon", imagem: "https://static.vecteezy.com/ti/vetor-gratis/p3/13260861-sistema-solar-ilustracao-em-realista-do-sol-e-oito-planetas-que-orbitam-vetor.jpg" },
       },
       cartaAtual: null,
     };
@@ -235,6 +252,9 @@ export default {
   width: 100%;
   height: 35%;
   background-position: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border-bottom: 1px solid #bbb;
   border-radius: 16px 16px 0 0;
 }
