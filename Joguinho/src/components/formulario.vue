@@ -42,16 +42,16 @@ export default {
       // jogadores: ["", "", "", ""],
       jogadores: {
         jogador1:{
-          nome:'', posicao: 0, pontos: 0, cor: "#bce1ab" 
+          nome:'', posicao: 1, pontos: 0, cor: "#bce1ab" 
         },
         jogador2:{
-          nome:'', posicao: 1, pontos: 0, cor: "#573e54"
+          nome:'', posicao: 2, pontos: 0, cor: "#573e54"
         },
         jogador3:{
-          nome:'', posicao: 2, pontos: 0, cor: "#361542"
+          nome:'', posicao: 3, pontos: 0, cor: "#361542"
         },
         jogador4:{
-          nome:'', posicao: 3, pontos: 0, cor: "#828a7d"
+          nome:'', posicao: 4, pontos: 0, cor: "#828a7d"
         },
       },
       mensagemErro: "",

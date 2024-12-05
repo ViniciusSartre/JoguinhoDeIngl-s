@@ -22,7 +22,7 @@
   
         <div class="caixapontos">
           <div class="pontos">
-            <h1>{{ pontos[jogador.posicao] }}</h1>
+            <h1>{{ pontos[jogador.posicao -1] }}</h1>
           </div>
         </div>
       </div>

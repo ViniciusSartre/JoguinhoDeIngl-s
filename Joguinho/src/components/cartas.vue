@@ -5,10 +5,14 @@
     </div>
 
     <!-- Exibe o jogador atual sem a posição -->
-    <div v-if="jogadorAtual" class="informacao-jogador">
+    <div v-if="cartaHabilitada">
+      <div v-if="jogadorAtual" class="informacao-jogador">
       <h1>Vez de: {{ jogadorAtual.nome }}</h1>
+      </div>      
     </div>
-
+    <div v-if="jogadorVencedor" class="informacao-jogador">
+      <h1>O Vencedor é <br> {{ jogadorMaisPontos.nome }}</h1>
+      </div>
     <!-- Exibe as cartas -->
     <div class="cartas" v-if="cartaHabilitada">
       <div class="carta"></div>
@@ -35,6 +39,9 @@
     <div class="botao resete">
       <input type="button" value="RESETAR" @click="resetaJogo">
     </div>
+    <div v-if="mensagemErro" class="mensagem-erro" :style="{backgroundColor: mensagemCor}">
+      <p>{{ mensagemErro }}</p>
+    </div>
   </div>
 </template>
 
@@ -48,6 +55,8 @@ export default {
       respostaJogador: "", // Resposta do jogador
       respondidas: [],
       cartaHabilitada: true,
+      mensagemCor: "red",
+      jogadorVencedor: false,
       ponto:{
         0: 0,
         1: 0,
@@ -66,6 +75,11 @@ export default {
     jogadorAtual() {
       return this.jogadores[this.turnoAtual];
     },
+    jogadorMaisPontos() {
+      const pontos = Object.values(this.ponto);
+      const jogadorMaisPontos = pontos.indexOf(Math.max(...pontos));
+      return this.jogadores[jogadorMaisPontos];
+    }
   },
   methods: {
     // Carrega os jogadores do localStorage
@@ -90,8 +104,16 @@ export default {
     sortearCarta() {
       const idsCartas = Object.keys(this.cartas).filter(id => !this.respondidas.includes(id)); // Exclui as cartas já respondidas
       if (idsCartas.length === 0) {
-        alert("Todas as cartas já foram respondidas!");
+        this.mensagemErro = "Todas as cartas já foram respondidas!";
+    this.mensagemCor = "black";
+        setTimeout(() => {
+          this.mensagemErro = "";
+          this.mensagemCor = "red";
+        }, 5000);
+        // alert("Todas as cartas já foram respondidas!");
         this.cartaHabilitada = false;
+        this.jogadorVencedor = true;
+        this.jogadorMaisPontos();
         return; // Se todas as cartas foram respondidas, não sorteia mais cartas
       }
       
@@ -112,9 +134,19 @@ export default {
     localStorage.setItem(`pontos${this.turnoAtual}`, this.ponto[this.turnoAtual]);
     const event = new Event("storage");
     window.dispatchEvent(event);
-    alert("Resposta Correta! Jogador " + this.turnoAtual + " tem " + this.ponto[this.turnoAtual]);
+    this.mensagemErro = "Resposta Correta.";
+    this.mensagemCor = "green";
+        setTimeout(() => {
+          this.mensagemErro = "";
+          this.mensagemCor = "red";
+        }, 3000);
+    // alert("Resposta Correta! Jogador " + this.turnoAtual + " tem " + this.ponto[this.turnoAtual]);
   } else {
-    alert("Resposta Errada!");
+    this.mensagemErro = "Resposta Errada.";
+        setTimeout(() => {
+          this.mensagemErro = "";
+        }, 3000);
+    // alert("Resposta Errada!");
   }
   this.proximoTurno(); // Avança para o próximo turno
   this.respostaJogador = ""; // Limpa a resposta do jogador
@@ -148,6 +180,7 @@ export default {
       localStorage.setItem("pontos3", this.ponto[3]);
 
       this.cartaHabilitada = true;
+      this.jogadorVencedor = false;
       this.respondidas = [];
       const event = new Event("storage");
       window.dispatchEvent(event);
@@ -174,6 +207,7 @@ export default {
 
   h1{
     color: #fff;
+    text-align: center;
   }
 }
 
@@ -291,5 +325,18 @@ export default {
     height: 40px;
     width: 100px;
   }
+}
+.mensagem-erro {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: red;
+  padding: 15px 25px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bolder;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 </style>
