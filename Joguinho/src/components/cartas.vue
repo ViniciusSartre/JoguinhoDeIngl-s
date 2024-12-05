@@ -1,12 +1,16 @@
 <template>
   <div class="caixaCartas">
+    <div class="botao voltar">
+      <input type="button" value="VOLTAR" @click="voltar">
+    </div>
+
     <!-- Exibe o jogador atual sem a posição -->
     <div v-if="jogadorAtual" class="informacao-jogador">
       <h1>Vez de: {{ jogadorAtual.nome }}</h1>
     </div>
 
     <!-- Exibe as cartas -->
-    <div class="cartas">
+    <div class="cartas" v-if="cartaHabilitada">
       <div class="carta"></div>
       <div class="carta" v-if="cartaAtual">
         <!-- Topo (área superior da carta) -->
@@ -28,6 +32,9 @@
         </div>
       </div>
     </div>
+    <div class="botao resete">
+      <input type="button" value="RESETAR" @click="resetaJogo">
+    </div>
   </div>
 </template>
 
@@ -39,6 +46,14 @@ export default {
       jogadores: [],  // Lista de jogadores
       turnoAtual: 0,   // Índice do jogador atual
       respostaJogador: "", // Resposta do jogador
+      respondidas: [],
+      cartaHabilitada: true,
+      ponto:{
+        0: 0,
+        1: 0,
+        2: 0,
+        3: 0,
+      },
       cartas: {
         0: { nivel: "1", texto: "Qualquer coisa", resposta: "Sim", imagem: "https://portalgerais.com/wp-content/uploads/2014/11/o-que-te-faz-feliz-600x376.jpg" },
         1: { nivel: "1", texto: "Qualquer coisa 2", resposta: "Não", imagem: "https://st4.depositphotos.com/2934765/28878/v/450/depositphotos_288788394-stock-illustration-emoji-smile-icon-vector-symbol.jpg" },
@@ -73,25 +88,38 @@ export default {
 
     // Sorteia uma carta aleatória
     sortearCarta() {
-      const idsCartas = Object.keys(this.cartas);
-      let idAleatorio;
-      do {
-        idAleatorio = idsCartas[Math.floor(Math.random() * idsCartas.length)];
-      } while (this.cartaAtual && this.cartaAtual === this.cartas[idAleatorio]);
-
+      const idsCartas = Object.keys(this.cartas).filter(id => !this.respondidas.includes(id)); // Exclui as cartas já respondidas
+      if (idsCartas.length === 0) {
+        alert("Todas as cartas já foram respondidas!");
+        this.cartaHabilitada = false;
+        return; // Se todas as cartas foram respondidas, não sorteia mais cartas
+      }
+      
+      let idAleatorio = idsCartas[Math.floor(Math.random() * idsCartas.length)];
       this.cartaAtual = this.cartas[idAleatorio];
     },
 
+
     // Verifica a resposta do jogador e avança para o próximo turno
     verificarResposta() {
-      if (this.respostaJogador.trim().toLowerCase() === this.cartaAtual.resposta.toLowerCase()) {
-        alert("Resposta Correta!");
-      } else {
-        alert("Resposta Errada!");
-      }
-      this.proximoTurno(); // Avança para o próximo turno
-      this.respostaJogador = ""; // Limpa a resposta do jogador
-    },
+  if (this.respostaJogador.trim().toLowerCase() === this.cartaAtual.resposta.toLowerCase()) {
+    // Marca a carta como respondida
+    const cartaId = Object.keys(this.cartas).find(id => this.cartas[id] === this.cartaAtual);
+    this.respondidas.push(cartaId); // Adiciona a carta ao array de respondidas
+    
+    // Lógica de pontuação (não mudou)
+    this.ponto[this.turnoAtual]++;
+    localStorage.setItem(`pontos${this.turnoAtual}`, this.ponto[this.turnoAtual]);
+    const event = new Event("storage");
+    window.dispatchEvent(event);
+    alert("Resposta Correta! Jogador " + this.turnoAtual + " tem " + this.ponto[this.turnoAtual]);
+  } else {
+    alert("Resposta Errada!");
+  }
+  this.proximoTurno(); // Avança para o próximo turno
+  this.respostaJogador = ""; // Limpa a resposta do jogador
+},
+
 
     // Inicia o jogo e seleciona o primeiro jogador e carta
     iniciarJogo() {
@@ -102,7 +130,30 @@ export default {
         alert("Nenhum jogador encontrado!");
       }
     },
+
+    voltar(){
+      localStorage.clear();
+      this.$router.push("/");
+    },
+
+    resetaJogo(){
+      this.ponto[0] = 0;
+      this.ponto[1] = 0;
+      this.ponto[2] = 0;
+      this.ponto[3] = 0;
+
+      localStorage.setItem("pontos0", this.ponto[0]);
+      localStorage.setItem("pontos1", this.ponto[1]);
+      localStorage.setItem("pontos2", this.ponto[2]);
+      localStorage.setItem("pontos3", this.ponto[3]);
+
+      this.cartaHabilitada = true;
+      this.respondidas = [];
+      const event = new Event("storage");
+      window.dispatchEvent(event);
+    }
   },
+
   mounted() {
     this.iniciarJogo(); // Inicia o jogo ao carregar o componente
   },
@@ -115,11 +166,15 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20vh;
+  margin-top: 10vh;
 }
 
 .informacao-jogador {
   margin-bottom: 20px;
+
+  h1{
+    color: #fff;
+  }
 }
 
 .cartas {
@@ -132,6 +187,10 @@ export default {
   width: 300px;
   height: 450px;
   background-color: lightgray;
+  background-image: url(../img/imagem_para_verso_de_carta_Guess.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 16px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   border: 1px solid #ffffff;
@@ -202,5 +261,35 @@ export default {
   color: white;
   background: none;
   cursor: pointer;
+}
+
+.voltar{
+  width: 100px;
+  margin-right: 500px;
+  margin-bottom: 10px;
+  align-self: right;
+  background-color: #fff;
+
+  input{
+    border: none;
+    background: none; 
+    cursor: pointer;
+    height: 40px;
+    width: 100px;
+  }
+}
+
+.resete{
+  margin-top: 20px;
+  width: 100px;
+
+  input{
+    border: none;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    height: 40px;
+    width: 100px;
+  }
 }
 </style>

@@ -22,7 +22,7 @@
   
         <div class="caixapontos">
           <div class="pontos">
-            <h1>{{ jogador.pontos }}</h1>
+            <h1>{{ pontos[jogador.posicao] }}</h1>
           </div>
         </div>
       </div>
@@ -31,31 +31,42 @@
   
 
   <script>
-  export default {
-    name: "jogadores",
-    data() {
-      return {
-        jogadorSalvo: '',
-        // jogadores: [
-        //   { nome: "Rene", posicao: 1, poderes: [1, 2, 3, 4, 5], pontos: 20, cor: "#bce1ab" },
-        //   { nome: "Advalker", posicao: 2, poderes: [1, 2, 3, 4, 5], pontos: 18, cor: "#573e54" },
-        //   { nome: "João", posicao: 3, poderes: [1, 2, 3, 4, 5], pontos: 16, cor: "#361542" },
-        //   { nome: "Fernanda", posicao: 4, poderes: [1, 2, 3, 4, 5], pontos: 14, cor: "#828a7d" },
-        // ],
-      };
+export default {
+  name: "jogadores",
+  data() {
+    return {
+      jogadorSalvo: [],
+      pontos: [0, 0, 0, 0], // Inicializando o array reativo
+    };
+  },
+  methods: {
+    pegaJogadores() {
+      this.jogadorSalvo = JSON.parse(localStorage.getItem("jogadores")) || [];
+      console.log("Jogadores carregados:", this.jogadorSalvo);
     },
-
-    methods:{
-      pegaJogadores(){
-        this.jogadorSalvo = JSON.parse(localStorage.getItem("jogadores"));
-        console.log("pegou os jogadores", this.jogadorSalvo)
-      }
+    pegaPontos() {
+      // Atualiza os pontos diretamente no array reativo
+      this.pontos = this.pontos.map((_, index) =>
+        parseInt(localStorage.getItem(`pontos${index}`), 10) || 0
+      );
     },
+    sincronizaPontos() {
+      console.log("Sincronizando pontos com localStorage");
+      this.pegaPontos();
+    },
+  },
+  mounted() {
+    this.pegaJogadores();
+    this.pegaPontos();
 
-    mounted() {
-      this.pegaJogadores();
-    }
-  };
+    // Listener para mudanças no localStorage
+    window.addEventListener("storage", this.sincronizaPontos);
+  },
+  beforeUnmount() {
+    // Remove o listener ao destruir o componente
+    window.removeEventListener("storage", this.sincronizaPontos);
+  },
+};
   </script>
   
 
@@ -76,7 +87,7 @@
   border: 3px solid; 
   border-radius: 10px;
   padding: 10px;
-  width: 300px;
+  width: 150px;
   color: rgb(0, 0, 0);
 }
 
@@ -130,61 +141,3 @@
 }
 
 </style>
- -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-<!-- <template>
-    <div class="caixajogadores">
-        <div class="jogadores">
-            <div class="nome"><h1>Rene</h1></div>
-            <div class="posicao"><h1>1°</h1></div>
-        </div>
-        <div class="caixapoderes">
-            <div class="poderes"></div>
-            <div class="poderes"></div>
-            <div class="poderes"></div>
-            <div class="poderes"></div>
-            <div class="poderes"></div>
-        </div>
-        <div class="caixapontos">
-            <div class="pontos"><h1>20</h1></div>
-        </div>
-    </div>
-</template>
-<script>
-</script>
-<style>
-    .caixajogadores{
-        .jogadores{
-            .nome{
-                h1{
-
-                }
-            }
-            .posicao{
-                h1{
-                    
-                }
-            }
-        }
-        .caixapoderes{
-
-        }
-        .caixapontos{
-
-        }
-    }
-</style> --> -->
